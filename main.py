@@ -98,7 +98,7 @@ bestXdtg=makeCombi(x, y, DecisionTreeClassifier(criterion='gini'))
 # try various max depth and max features for decision tree(gini)
 trainSetX, testSetX, trainSetY, testSetY = train_test_split(bestXdtg, y, test_size=0.2, shuffle=True, random_state=1)
 param_grid=[{'max_depth':np.arange(1, 20), 'max_features':np.arange(1, len(bestXdtg))}]
-dtgGridSearchCV=GridSearchCV(DecisionTreeClassifier(criterion='entropy'), param_grid, cv=5)
+dtgGridSearchCV=GridSearchCV(DecisionTreeClassifier(criterion='gini'), param_grid, cv=5)
 dtgGridSearchCV.fit(trainSetX, trainSetY)
 print(dtgGridSearchCV.best_params_)
 print('Best score :', dtgGridSearchCV.best_score_)
