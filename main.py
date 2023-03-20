@@ -75,7 +75,7 @@ bestXdte=makeCombi(x, y, DecisionTreeClassifier(criterion='entropy'))
 
 # try various max depth and max features for decision tree(entropy)
 trainSetX, testSetX, trainSetY, testSetY = train_test_split(bestXdte, y, test_size=0.2, shuffle=True, random_state=1)
-param_grid=[{'max_depth':np.arange(1, 20), 'max_features':np.arange(1, len(bestXdte))}]
+param_grid=[{'max_depth':np.arange(1, 21), 'max_features':np.arange(1, len(bestXdte.columns) + 1)}]
 dteGridSearchCV=GridSearchCV(DecisionTreeClassifier(criterion='entropy'), param_grid, cv=5)
 dteGridSearchCV.fit(trainSetX, trainSetY)
 print(dteGridSearchCV.best_params_)
@@ -97,7 +97,7 @@ bestXdtg=makeCombi(x, y, DecisionTreeClassifier(criterion='gini'))
 
 # try various max depth and max features for decision tree(gini)
 trainSetX, testSetX, trainSetY, testSetY = train_test_split(bestXdtg, y, test_size=0.2, shuffle=True, random_state=1)
-param_grid=[{'max_depth':np.arange(1, 20), 'max_features':np.arange(1, len(bestXdtg))}]
+param_grid=[{'max_depth':np.arange(1, 21), 'max_features':np.arange(1, len(bestXdtg.columns) + 1)}]
 dtgGridSearchCV=GridSearchCV(DecisionTreeClassifier(criterion='gini'), param_grid, cv=5)
 dtgGridSearchCV.fit(trainSetX, trainSetY)
 print(dtgGridSearchCV.best_params_)
