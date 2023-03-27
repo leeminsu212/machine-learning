@@ -119,7 +119,7 @@ bestXlr=makeCombi(x, y, LogisticRegression())
 
 # try various solver for logistic regression
 trainSetX, testSetX, trainSetY, testSetY = train_test_split(bestXlr, y, test_size=0.2, shuffle=True, random_state=1)
-param_grid=[{'solver':['lbfgs', 'sag', 'saga'], 'dual':[False, True], 'warm_start':[False, True]}]
+param_grid=[{'solver':['lbfgs', 'sag', 'saga'], 'warm_start':[False, True]}]
 lrGridSearchCV=GridSearchCV(LogisticRegression(), param_grid, cv=5)
 lrGridSearchCV.fit(trainSetX, trainSetY)
 print(lrGridSearchCV.best_params_)
@@ -127,11 +127,10 @@ print('Best score :', lrGridSearchCV.best_score_)
 
 # store best max_depth value and max_features value
 bestSolver=lrGridSearchCV.best_params_.get('solver')
-bestDual=lrGridSearchCV.best_params_.get('dual')
 bestWarmStart=lrGridSearchCV.best_params_.get('warm_start')
 
 # evaluate logistic regression
-lr=LogisticRegression(solver=bestSolver, dual=bestDual, warm_start=bestWarmStart)
+lr=LogisticRegression(solver=bestSolver, warm_start=bestWarmStart)
 # try various value of k for k-fold CV
 for k in range(2, 10, 2):
     print('\nCross validation with k=', k)
